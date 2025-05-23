@@ -6,7 +6,7 @@ export default defineConfig([
   { ignores: ['dist'] },
   ...pixie.base,
   {
-    files: ['eslint.config.js', 'vite.config.ts'],
+    files: ['eslint.config.js'],
     rules: {
       'import-x/no-default-export': 'off',
     },
@@ -14,7 +14,6 @@ export default defineConfig([
   {
     files: ['src/**/*'],
     rules: {
-      'n/no-unsupported-features/node-builtins': 'off',
       'no-console': 'off',
     },
   },

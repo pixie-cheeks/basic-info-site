@@ -1,8 +1,8 @@
 {
-  "name": "practice-node",
+  "name": "basic-info-site",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/app.js",
+  "main": "src/index.js",
   "private": true,
   "engines": {
     "node": ">=21.2.0"
