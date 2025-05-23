@@ -1,0 +1,57 @@
+{
+  "name": "practice-node",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js",
+  "private": true,
+  "engines": {
+    "node": ">=21.2.0"
+  },
+  "scripts": {
+    "start": "node .",
+    "watch": "node --watch .",
+    "lint": "eslint",
+    "prepare": "husky",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@pixie-cheeks/eslint-config": "13.0.0",
+    "@types/node": "22.15.21",
+    "cspell": "9.0.2",
+    "eslint": "9.27.0",
+    "husky": "9.1.7",
+    "lint-staged": "16.0.0",
+    "prettier": "3.5.3"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "cspell": {
+    "version": "0.2",
+    "language": "en,en-GB,lorem",
+    "allowCompoundWords": true,
+    "dictionaries": [
+      "html"
+    ],
+    "words": [
+      "awmottaz",
+      "esbuild",
+      "unrs"
+    ],
+    "ignorePaths": [
+      "dist",
+      "node_modules",
+      "pnpm-lock.yaml"
+    ]
+  },
+  "lint-staged": {
+    "*": [
+      "cspell --no-must-find-files",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.js": [
+      "eslint --max-warnings 0"
+    ]
+  }
+}
