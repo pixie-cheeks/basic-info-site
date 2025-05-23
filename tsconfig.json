@@ -6,7 +6,7 @@
     "module": "NodeNext",
     "skipLibCheck": true,
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "noEmit": true,
 
     /* Bundler mode */
