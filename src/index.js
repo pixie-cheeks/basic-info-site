@@ -1,6 +1,11 @@
-import { createServer } from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import express from 'express';
+
+const app = express();
+const port = 3_000;
+const hostname = 'localhost';
+const serverHome = `http://${hostname}:${port}`;
 
 const pathnameToFilename = (urlPathName) => {
   const filenameObj = { status: 200, filename: './index.html' };
@@ -15,26 +20,22 @@ const pathnameToFilename = (urlPathName) => {
   return { status: 404, filename: './404.html' };
 };
 
-const port = 8_080;
-const hostname = 'localhost';
-const serverHome = `http://${hostname}:${port}`;
-
-const server = createServer(async (req, res) => {
-  const { pathname } = new URL(`${serverHome}${req.url}`);
-  const { status, filename } = pathnameToFilename(pathname);
-  res.setHeader('content-type', 'text/html');
-
+app.get(/^\/.*/, async (req, res) => {
+  const { status, filename } = pathnameToFilename(req.path);
   try {
     const fileContent = await fs.readFile(
       path.resolve(import.meta.dirname, filename),
     );
-    res.statusCode = status;
-    res.end(fileContent);
+    res.type('html');
+    res.status(status);
+    res.send(fileContent);
   } catch (error) {
     console.error(error);
+    res.status(500);
+    res.send('The server has encountered an error.');
   }
 });
 
-server.listen(port, hostname, () => {
+app.listen(port, () => {
   console.log(`Server started at ${serverHome}`);
 });
