@@ -17,6 +17,7 @@
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
     "@pixie-cheeks/eslint-config": "13.0.0",
+    "@types/express": "5.0.2",
     "@types/node": "22.15.21",
     "cspell": "9.0.2",
     "eslint": "9.27.0",
@@ -53,5 +54,8 @@
     "*.js": [
       "eslint --max-warnings 0"
     ]
+  },
+  "dependencies": {
+    "express": "5.1.0"
   }
 }
