@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises';
 import path from 'node:path';
 import express from 'express';
 
@@ -22,18 +21,14 @@ const pathnameToFilename = (urlPathName) => {
 
 app.get(/^\/.*/, async (req, res) => {
   const { status, filename } = pathnameToFilename(req.path);
-  try {
-    const fileContent = await fs.readFile(
-      path.resolve(import.meta.dirname, filename),
-    );
-    res.type('html');
-    res.status(status);
-    res.send(fileContent);
-  } catch (error) {
+  const filepath = path.resolve(import.meta.dirname, filename);
+  res.sendFile(filepath, (error) => {
+    if (res.headersSent) return;
     console.error(error);
     res.status(500);
-    res.send('The server has encountered an error.');
-  }
+    res.send('The server encountered an error.');
+  });
+  res.status(status);
 });
 
 app.listen(port, () => {
